@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection</title>
+    <style>
+        
+        #left{
+            display: flex;
+            justify-content: cneter;
+            align-items: center;
+            flex-direction: column;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        #image-preview img {
+            max-width: 300px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="file"] {
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Plant Disease Detection</h1>
+        
+        <table >
+            <tr>
+                <td id = "left">
+                    <div id="image-preview"></div>
+                    <h2 id="prediction-result"></h2>
+                    <form id="upload-form" action="/predict" method="post" enctype="multipart/form-data">
+                        <input type="file" id="file-input" name="file" accept="image/*" required>
+                        <button type="submit">Upload and Predict</button>
+                    </form>
+                </td>
+                <td id="right"></td>
+            </tr>
+            
+        </table>
+        
+        
+    </center>
+    
+
+    <script>
+        document.querySelector('#file-input').addEventListener('change', function(event){
+            let file = event.target.files[0]
+            if(file){
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.style.maxWidth = '300px';  
+                    const preview = document.getElementById('image-preview');
+                    preview.innerHTML = '';  
+                    preview.appendChild(imgElement);
+                };
+                reader.readAsDataURL(file);
+            }
+        })
+
+        document.getElementById('upload-form').onsubmit = async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('prediction-result').innerText = `Prediction: ${result.prediction[0][0]} Confidence: ${result.prediction[0][1]}`
+            str = '<h1>Other Predictions</h1>'
+            for(let i = 1; i < result.prediction.length; i++){
+                curr = result.prediction[i]
+                str += `<ul><li>${curr[0]} : ${curr[1]}</li></ul>`
+            }
+            document.querySelector('#right').innerHTML = str
+        };
+    </script>
+</body>
+</html>
