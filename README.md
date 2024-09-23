@@ -1,131 +1,86 @@
+# Plant Disease Detection
 
-# Plant Disease Detection Model
+This project is a web application that uses machine learning to detect diseases in plants from uploaded images.
 
-This project provides a web application for detecting plant diseases using a machine learning model. The app allows users to upload images of plant leaves, and it predicts the disease category based on the uploaded image. It displays the predicted category along with the top 5 possible categories and their confidence levels.
+## Project Structure
 
-
-
-
+```
+PLANT DISEASE DETECTION/
+├── model/
+│   └── trained_plant_disease_model.h5
+├── templates/
+│   ├── index.html
+│   └── index2.html
+├── test/
+│   └── test/
+├── app_final.py
+├── LICENSE
+├── plots.py
+└── README.md
+```
 
 ## Features
 
-- **Image Upload**: Users can upload an image of a plant leaf.
+- Detects diseases in 38 different classes of plants and plant diseases
+- Uses a trained deep learning model (TensorFlow/Keras)
+- Web interface for easy image upload and prediction
 
-- **Prediction**: The model predicts the disease category of the plant leaf.
+## Installation
 
-- **Top 5 Predictions**: The app displays the top 5 categories with their confidence levels.
-
-- **Image Preview**: Shows a preview of the uploaded image.
-
-## Technologies
-
-- **Flask**: For creating the web application.
-
-- **TensorFlow/Keras**: For loading and running the machine learning model.
-
-- **HTML/CSS/JavaScript**: For building the front-end interface.
-
-## Setup
-
-### Requirements
-
-- Python 3.7+
-
-- Flask
-
-- TensorFlow
-
-- Keras
-
-### Installation
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/yourusername/plant-disease-detection.git
-   cd plant-disease-detection
+1. Clone this repository
+2. Install the required dependencies:
    ```
-
-2. **Create a Virtual Environment**
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use \`venv\Scripts\activate\`
+   pip install flask tensorflow numpy matplotlib
    ```
-
-3. **Install Dependencies**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-   Ensure `requirements.txt` includes:
-   ```
-   Flask
-   tensorflow
-   ```
-
-4. **Place Your Model and JSON Files**
-
-   - Save your trained model as `model.h5` in the project directory.
-
-   - Create a JSON file (`categories.json`) with category labels in the project directory.
-
-   Example `categories.json`:
-   ```json
-   {
-       "categories": {
-           "0": "Apple Scab",
-           "1": "Apple Black Rot",
-           "2": "Cedar Apple Rust",
-           "3": "Healthy"
-       }
-   }
-   ```
-
-### Running the Application
-
-1. **Start the Flask App**
-
-   ```bash
-   python app.py
-   ```
-
-2. **Access the Web Application**
-
-   Open your web browser and go to `http://127.0.0.1:5000/.
 
 ## Usage
 
-1. **Upload an Image**: Use the "Choose File" button to select an image of a plant leaf from your computer.
+1. Run the Flask application:
+   ```
+   python app_final.py
+   ```
+2. Open a web browser and navigate to `http://localhost:5000`
+3. Upload an image of a plant leaf through the web interface
+4. Get the prediction for the plant disease
 
-2. **Predict**: Click the "Upload and Predict" button to send the image for prediction.
+## Model Architecture
 
-3. **View Results**: The app will display the uploaded image, predicted disease category, and the top 5 predictions with confidence levels.
+The model uses a Convolutional Neural Network (CNN) with the following architecture:
 
-## Example
+- Multiple convolutional layers with increasing filter sizes (32, 64, 128, 256, 512)
+- Max pooling layers
+- Dropout layers for regularization
+- Flatten layer
+- Dense layers with ReLU activation
+- Final dense layer with softmax activation for 38 class outputs
 
-- **Image Upload**: Upload an image like `AppleCedarRust1.JPG`.
+## Training Process
 
-- **Predicted Category**: "Cedar Apple Rust"
+- The model was trained on the "New Plant Diseases Dataset(Augmented)" from Kaggle
+- Image size: 128x128 pixels
+- Optimizer: Adam with learning rate 0.0001
+- Loss function: Categorical Cross-Entropy
+- Trained for 10 epochs with a batch size of 128
 
-- **Top 5 Predictions**:
-  - Category: "Cedar Apple Rust", Probability: 45.6%
-  - Category: "Apple Scab", Probability: 25.3%
-  - Category: "Apple Black Rot", Probability: 15.2%
-  - Category: "Healthy", Probability: 10.8%
-  - (Other category if any)
+## Files
 
-## Troubleshooting
-
-- **Error Loading JSON File**: Ensure `categories.json` is correctly formatted and placed in the project directory.
-
-- **Model Prediction Issues**: Ensure the model is correctly loaded and compatible with the input image dimensions.
-
-## Contributing
-
-Feel free to fork the repository and submit pull requests for improvements. If you encounter any issues, please open an issue on GitHub.
+- `app_final.py`: Main Flask application
+- `plots.py`: (Purpose not specified, likely for generating plots or visualizations)
+- `templates/index.html` and `templates/index2.html`: HTML templates for the web interface
+- `trained_plant_disease_model.h5`: Trained model file
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+See the `LICENSE` file for details.
+
+## Contributing
+
+Instructions for how to contribute to this project. (Add specific guidelines if available)
+
+## Contact
+
+Your contact information or how to reach out for questions and support.
+
+## Acknowledgments
+
+- Dataset source: [New Plant Diseases Dataset on Kaggle](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)
