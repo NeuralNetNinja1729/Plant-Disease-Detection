@@ -50,7 +50,7 @@ CLASS_NAMES = np.array(
     ]
 )
     
-model = load_model('model2/trained_plant_disease_model_2.h5')
+model = load_model('model/trained_plant_disease_model.h5')
 def predict_one_image(img_path, model):
     img = tf.keras.utils.load_img(img_path, target_size=(128, 128))
     image = np.array([tf.keras.preprocessing.image.img_to_array(img)])
