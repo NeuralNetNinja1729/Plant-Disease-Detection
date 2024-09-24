@@ -113,14 +113,6 @@ The model uses a Convolutional Neural Network (CNN) with the following architect
 
 See the `LICENSE` file for details.
 
-## Contributing
-
-Instructions for how to contribute to this project. (Add specific guidelines if available)
-
-## Contact
-
-Your contact information or how to reach out for questions and support.
-
 ## Acknowledgments
 
 - Dataset source: [New Plant Diseases Dataset on Kaggle](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)
