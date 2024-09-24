@@ -1,13 +1,14 @@
 # Plant Disease Detection
 
-This project is a web application that uses machine learning to detect diseases in plants from uploaded images.
+This project is a web application that uses machine learning to detect diseases in plants from uploaded images. The backend is built using **Flask**, a lightweight and powerful Python web framework.
 
 ## Project Structure
 
 ```
 PLANT DISEASE DETECTION/
 ├── model/
-│   └── trained_plant_disease_model.h5
+│   ├── trained_plant_disease_model.h5
+│   └── plantDisease-2.ipynb
 ├── templates/
 │   ├── index.html
 │   └── index2.html
@@ -16,6 +17,7 @@ PLANT DISEASE DETECTION/
 ├── app_final.py
 ├── LICENSE
 ├── plots.py
+├── requirements.txt
 └── README.md
 ```
 
@@ -23,14 +25,38 @@ PLANT DISEASE DETECTION/
 
 - Detects diseases in 38 different classes of plants and plant diseases
 - Uses a trained deep learning model (TensorFlow/Keras)
+- **Flask-powered backend** for efficient request handling and routing
 - Web interface for easy image upload and prediction
+- Jupyter notebook for model development and training
+
+## Backend Framework
+
+This project uses **Flask** as the backend framework. Flask is chosen for its simplicity, flexibility, and robustness in creating web applications. It handles:
+
+- Routing of web requests
+- Serving of HTML templates
+- Processing of image uploads
+- Integration with the machine learning model for predictions
 
 ## Installation
 
 1. Clone this repository
-2. Install the required dependencies:
+2. Create a virtual environment:
    ```
-   pip install flask tensorflow numpy matplotlib
+   python -m venv venv
+   ```
+3. Activate the virtual environment:
+   - On Windows:
+     ```
+     venv\Scripts\activate
+     ```
+   - On macOS and Linux:
+     ```
+     source venv/bin/activate
+     ```
+4. Install the required dependencies:
+   ```
+   pip install -r requirements.txt
    ```
 
 ## Usage
@@ -42,6 +68,18 @@ PLANT DISEASE DETECTION/
 2. Open a web browser and navigate to `http://localhost:5000`
 3. Upload an image of a plant leaf through the web interface
 4. Get the prediction for the plant disease
+
+## Model Development
+
+The `model/plantDisease-2.ipynb` Jupyter notebook contains the code for developing and training the plant disease detection model. This notebook includes:
+
+- Data loading and preprocessing
+- Model architecture definition
+- Training process
+- Evaluation metrics
+- Visualization of training results
+
+You can use this notebook to understand the model's development process, make improvements, or retrain the model with new data.
 
 ## Model Architecture
 
@@ -64,10 +102,12 @@ The model uses a Convolutional Neural Network (CNN) with the following architect
 
 ## Files
 
-- `app_final.py`: Main Flask application
+- `app_final.py`: Main Flask application containing the backend logic
 - `plots.py`: (Purpose not specified, likely for generating plots or visualizations)
 - `templates/index.html` and `templates/index2.html`: HTML templates for the web interface
-- `trained_plant_disease_model.h5`: Trained model file
+- `model/trained_plant_disease_model.h5`: Trained model file
+- `model/plantDisease-2.ipynb`: Jupyter notebook for model development and training
+- `requirements.txt`: List of Python dependencies
 
 ## License
 
@@ -84,3 +124,4 @@ Your contact information or how to reach out for questions and support.
 ## Acknowledgments
 
 - Dataset source: [New Plant Diseases Dataset on Kaggle](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)
+- Flask: [Flask Documentation](https://flask.palletsprojects.com/)
