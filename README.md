@@ -2,6 +2,8 @@
 
 This project is a web application that uses machine learning to detect diseases in plants from uploaded images. The backend is built using **Flask**, a lightweight and powerful Python web framework.
 
+<img width="1037" alt="Screenshot 2024-09-24 at 8 07 18 PM" src="https://github.com/user-attachments/assets/9d08cc46-65e5-43f1-9848-e90eb3ca76c2">
+
 ## Project Structure
 
 ```
