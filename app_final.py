@@ -50,12 +50,18 @@ CLASS_NAMES = np.array(
     ]
 )
     
+# model = load_model('model2/trained_plant_disease_model_2.h5')
 model = load_model('model/trained_plant_disease_model.h5')
 def predict_one_image(img_path, model):
     img = tf.keras.utils.load_img(img_path, target_size=(128, 128))
     image = np.array([tf.keras.preprocessing.image.img_to_array(img)])
     predictions = model.predict(image)
-    return CLASS_NAMES[np.argmax(predictions)], np.max(np.round(predictions, 2))
+    flattened_predictions = predictions.flatten()
+    sorted_predictions = np.sort(flattened_predictions)
+    top5_sorted_predictions = sorted_predictions[-5:][::-1]
+    top5_values = CLASS_NAMES[np.argsort(predictions)].flatten()[-5:][::-1]
+    tup = [(top5_values[i], int(top5_sorted_predictions[i] * 100)) for i in range(len(top5_values))]
+    return CLASS_NAMES[np.argmax(predictions)], np.max(np.round(predictions, 2)), tup
 
 @app.route('/')
 def index():
@@ -74,8 +80,13 @@ def upload():
             os.makedirs('uploads')
         file_path = f'uploads/{file.filename}'
         file.save(file_path)
-        pred_class, confidence = predict_one_image(file_path, model)
-        return jsonify(prediction=f'{pred_class} | Confidence: {confidence}')
+        pred_class, confidence, tup = predict_one_image(file_path, model)
+        print(tup)
+        # return jsonify(prediction=f'{pred_class} | Confidence: {confidence}')
+        return jsonify(prediction=tup)
+        
+
+        
     
 if __name__ == '__main__':
     app.run(debug=True)
