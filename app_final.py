@@ -59,7 +59,7 @@ def predict_one_image(img_path, model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index2.html')
 
 @app.route('/predict', methods=['POST'])
 def upload():
